@@ -1,4 +1,4 @@
-if(room > 1) {
+if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect) {
 	if (global.pause && object_exists(oCamera)) {
 		draw_set_color(c_black);
 		draw_set_alpha (0.5);

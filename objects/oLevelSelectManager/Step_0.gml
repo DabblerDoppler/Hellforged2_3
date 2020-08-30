@@ -30,5 +30,5 @@ if (move != 0 && menuDelay == 0) {
 
 var push = keyboard_check_pressed(vk_enter) + keyboard_check_pressed(ord("Z")) + gamepad_button_check_pressed(0, gp_face1);
 if (push >= 1) { 
-	scr_SlideTransition(TRANS_MODE.GOTO, mpos + 3); 
+	scr_SlideTransition(TRANS_MODE.GOTO, level[mpos]); 
 	}

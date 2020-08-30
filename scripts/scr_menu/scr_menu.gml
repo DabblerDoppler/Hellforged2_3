@@ -2,7 +2,7 @@ function scr_menu() {
 	switch (mpos) {
 		//start
 		case 0: {
-			scr_SlideTransition(TRANS_MODE.GOTO, 3);
+			scr_SlideTransition(TRANS_MODE.GOTO, rLevel0);
 			break;
 		}
 		//continue
@@ -21,7 +21,7 @@ function scr_menu() {
 		//Level Select
 		case 2: {
 			//go to level select screen
-			room_goto(2);
+			room_goto(rLevelSelect);
 			break;	
 		}
 		//options
@@ -31,7 +31,7 @@ function scr_menu() {
 		
 		//credits
 		case 4: {
-			room_goto(0);
+			room_goto(rCreditMenu);
 			break;	
 		
 		}

@@ -1,4 +1,12 @@
+if(global.pause || global.freeze) {
+	exit;	
+}
+
 anim_frames = max(anim_frames - 1, 0);
+
+
+
+
 
 if(place_meeting(x, y, oPlayer) && oPlayer.onground == false && oPlayer.vsp > 0 && oPlayer.state != states.bouncing) {
 	anim_frames = anim_frames_max;
@@ -25,3 +33,5 @@ if(anim_frames == 14) {
 } else if (anim_frames == 0) {
 	image_index = 0;	
 }
+
+x += hsp;

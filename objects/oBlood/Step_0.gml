@@ -1,6 +1,6 @@
 
 
-if(collision_point(x, y, oWall, false, false)) {
+if(collision_point(x, y, oWall, false, false) || collision_point(x,y,oBloodWall, false, false)) {
 	visible = false;
 	if(speed > 0) {
 		speed -= slowDown;

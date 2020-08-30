@@ -21,10 +21,10 @@ if (mode != TRANS_MODE.OFF) {
 			case TRANS_MODE.NEXT: {
 				global.freeze = true;
 				mode = TRANS_MODE.INTRO;
-				if (room_exists(room + 1)) {
+				if (room != room_last) {
 					room_goto_next();
 				} else {
-					room_goto(room_first);
+					room_goto(rMainMenu);
 				}
 				break;
 			}

@@ -3,7 +3,7 @@ sprite_index = sBeholder;
 
 inst = instance_id;
 image_speed = 0.41;
-image_index = random(25)
+image_index = irandom(25);
 
 up_frames = 61;
 down_frames = 0;

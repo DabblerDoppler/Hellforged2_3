@@ -204,5 +204,24 @@ key_abil1_select_r = 0;
 key_abil2_select_r = 0;
 key_abil3_select_r = 0;
 
+killSound[0] = enemydeath;
+killSound[1] = enemydeath2;
+killSound[2] = enemydeath3;
+
+killPitch = 1;
+pitchArray[0] = sE;
+pitchArray[1] = sF;
+pitchArray[2] = sFsharp;
+pitchArray[3] = sG;
+pitchArray[4] = sGsharp;
+pitchArray[5] = sA;
+pitchArray[6] = sAsharp;
+pitchArray[7] = sB;
+pitchArray[8] = sC;
+pitchArray[9] = sCsharp;
+pitchArray[10] = sD;
+pitchArray[11] = sDsharp;
+pitchArray[12] = sEhigh;
+
 
 //killSound[0] = 

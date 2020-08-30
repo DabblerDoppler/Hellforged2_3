@@ -6,5 +6,5 @@ if((id) != global.creditManagerID) {
 }
 
 if(keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) {
-	room_goto(1);	
+	room_goto(rMainMenu);	
 }

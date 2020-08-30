@@ -576,7 +576,7 @@ if (state == states.dead) {
 		uppercut_buffer = ability_buffer_max;	
 	}
 
-	//stylekillcode
+	//style kill code
 	if (stylekillwaitdelay == 1) {
 			instance_create_layer(x,y, "Instances", oAfterimage);
 			stylekilldelay = stylekilldelay_max;
@@ -631,8 +631,12 @@ if (state == states.dead) {
 		vsp = -6;
 		stylekilljumpdelay = stylekilljumpdelay_max;
 		ScreenShake(global.killShakeConstant, 15);
-		audio_play_sound(choose(enemydeath, enemydeath2, enemydeath3), 5, false);
+		var t = choose(0,1,2);
+		audio_play_sound(killSound[t], 5, false);
+		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
+		audio_play_sound(pitchArray[killPitch], 2, false);
 		killPitch++;
+		
 	}
 
 
@@ -650,8 +654,14 @@ if (state == states.dead) {
 		v_corner_correction = v_corner_correction_dash;
 		h_corner_correction = h_corner_correction_dash;
 	}
-
-
+	
+	if(place_meeting(x + hsp, y, oMovingPlatform)) {
+		while(!place_meeting(x+sign(hsp), y, oMovingPlatform)) {
+		x = x + sign(hsp);	
+		}
+		hsp = 0;
+		hsp_frac = 0;
+	}
 
 
 	//check for horizontal collision
@@ -659,7 +669,6 @@ if (state == states.dead) {
 		while (!place_meeting(x+sign(hsp), y, oWall)) {
 			x = x + sign(hsp);
 		}
-		
 		//corner correction
 		
 		if (hsp != 0 && corner_delay == 0) {
@@ -669,18 +678,16 @@ if (state == states.dead) {
 			} else if (!(place_meeting(x + hsp, y - v_corner_correction, oWall))) {
 				y -= v_corner_correction;
 				corner_delay = corner_delay_max;
-				
 			} else {
 			hsp = 0;
 			hsp_frac = 0;
 			}
 		} else {
-		hsp = 0;
-		hsp_frac = 0;
+			hsp = 0;
+			hsp_frac = 0;
 		}
 	
 	}
-
 
 
 	//x = current x plus velocity
@@ -689,6 +696,22 @@ if (state == states.dead) {
 	//this way we'll stil to a ceiling until the uppercut is over instead of falling
 	if(uppercutdelay > 0 && vsp > 0) {
 		vsp = 0;	
+	}
+	
+	if ( vsp >= 0 && place_meeting(x, y + vsp ,oOneWayPlatform)) {
+		while (!place_meeting(x, y + sign(vsp) ,oOneWayPlatform)) {
+			y = y + sign(vsp);
+		}
+		vsp = 0;
+		vsp_frac = 0;
+	}
+	
+	if (place_meeting(x, y + vsp, oMovingPlatform)) {
+		while(!place_meeting(x, y + sign(vsp), oMovingPlatform)) {
+			y = y + sign(vsp);	
+		}
+		vsp = 0;
+		vsp_frac = 0;
 	}
 
 	//check for vertical collision
@@ -725,6 +748,13 @@ if (state == states.dead) {
 
 	var last_onground = onground;
 	onground = place_meeting(x, y + 1, oWall);
+	
+	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform)) {
+		onground = 1;	
+		if(place_meeting(x, y + 1, oMovingPlatform)) {
+			x += place_meeting(x, y + 1, oMovingPlatform).hsp;
+		}
+	}
 
 	if(last_onground == 0 && onground == 1) {
 		audio_sound_pitch(land, choose(0.7, 0.8, 0.9, 1));

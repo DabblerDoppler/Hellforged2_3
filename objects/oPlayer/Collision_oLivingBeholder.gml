@@ -11,7 +11,10 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		hsp_frac = 0;
 	} else if (uppercutdelay != 0) {	
 		scr_generate_blood(150);
-		audio_play_sound(choose(enemydeath, enemydeath2, enemydeath3), 3, false);
+		var t = choose(0,1,2);
+		audio_play_sound(killSound[t], 5, false);
+		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
+		audio_play_sound(pitchArray[killPitch], 2, false);
 		killPitch++;
 		instance_destroy(other);
 		ScreenShake(global.killShakeConstant, 15);
@@ -34,7 +37,10 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		
 	} else if (dashdelay != 0 ) {
 		scr_generate_blood(150);
-		audio_play_sound(choose(enemydeath, enemydeath2, enemydeath3), 3, false);
+		var t = choose(0,1,2);
+		audio_play_sound(killSound[t], 5, false);
+		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
+		audio_play_sound(pitchArray[killPitch], 2, false);
 		killPitch++;
 		if(dashBound == 1) {
 			abil1_used = 0;	

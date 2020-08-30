@@ -13,11 +13,5 @@ if(oPlayer.onground) {
 		hasPlayedSound = true;
 		audio_play_sound(downstairs, 6, false);
 	}
-
-	if(room_exists(room + 1)) {
-		scr_SlideTransition(TRANS_MODE.NEXT);
-	} else {
-		scr_SlideTransition(TRANS_MODE.GOTO(room_first));	
-	}
-
+		scr_SlideTransition(TRANS_MODE.GOTO, targetRoom);	
 }

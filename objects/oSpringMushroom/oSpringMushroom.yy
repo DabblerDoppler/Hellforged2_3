@@ -24,6 +24,7 @@
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"oSpringMushroom","path":"objects/oSpringMushroom/oSpringMushroom.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"oSpringMushroom","path":"objects/oSpringMushroom/oSpringMushroom.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":7,"eventType":7,"collisionObjectId":null,"parent":{"name":"oSpringMushroom","path":"objects/oSpringMushroom/oSpringMushroom.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":4,"collisionObjectId":{"name":"oMovingPlatform","path":"objects/oMovingPlatform/oMovingPlatform.yy",},"parent":{"name":"oSpringMushroom","path":"objects/oSpringMushroom/oSpringMushroom.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],

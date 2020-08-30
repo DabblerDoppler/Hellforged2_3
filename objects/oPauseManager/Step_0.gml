@@ -2,7 +2,7 @@ if(global.PauseManagerID != id) {
 	instance_destroy(self);	
 }
 
-if(room != 0) {
+if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 
 	key_escape = keyboard_check_pressed(vk_escape);
 	key_f3 = keyboard_check_pressed(vk_f3);
