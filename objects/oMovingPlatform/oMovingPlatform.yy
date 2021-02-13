@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "mainlev_build_export_63",
-    "path": "sprites/mainlev_build_export_63/mainlev_build_export_63.yy",
+    "name": "mainlev_build_export_62",
+    "path": "sprites/mainlev_build_export_62/mainlev_build_export_62.yy",
   },
   "solid": false,
   "visible": true,
@@ -24,7 +24,10 @@
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"oMovingPlatform","path":"objects/oMovingPlatform/oMovingPlatform.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"oMovingPlatform","path":"objects/oMovingPlatform/oMovingPlatform.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
-  "properties": [],
+  "properties": [
+    {"varType":0,"value":"120","rangeEnabled":false,"rangeMin":0.0,"rangeMax":10.0,"listItems":[],"multiselect":false,"filters":[],"resourceVersion":"1.0","name":"move_frame_max","tags":[],"resourceType":"GMObjectProperty",},
+    {"varType":2,"value":"\"left\"","rangeEnabled":false,"rangeMin":0.0,"rangeMax":10.0,"listItems":[],"multiselect":false,"filters":[],"resourceVersion":"1.0","name":"moveDirection","tags":[],"resourceType":"GMObjectProperty",},
+  ],
   "overriddenProperties": [],
   "parent": {
     "name": "Tiles",

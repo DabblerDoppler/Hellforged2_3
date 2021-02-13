@@ -24,13 +24,8 @@ if(right_frames == 1) {
 	left_frames = move_frame_max;
 }
 
-if(place_meeting(x + hsp, y, oPlayer)) {
-	oPlayer.x += 3.5 * hsp;
-	oPlayer.hsp_walk = 0;
-	oPlayer.hsp_acc = 0;
-	oPlayer.alarm[0] = 2;
-	oPlayer.hsp = 0;
-	oPlayer.hsp_frac = 0;
+if(place_meeting(x + hsp , y, oPlayer)) {
+	oPlayer.platformContact = id;
 }
 
 x = x + hsp;

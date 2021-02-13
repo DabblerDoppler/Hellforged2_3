@@ -655,12 +655,21 @@ if (state == states.dead) {
 		h_corner_correction = h_corner_correction_dash;
 	}
 	
-	if(place_meeting(x + hsp, y, oMovingPlatform)) {
-		while(!place_meeting(x+sign(hsp), y, oMovingPlatform)) {
-		x = x + sign(hsp);	
+	if(place_meeting(x + hsp, y, oMovingPlatform) || platformContact != 0) {
+		if(!key_jump) {
+			if(place_meeting(x + hsp, y, oMovingPlatform)) {
+				platformContact = instance_place(x + hsp, y, oMovingPlatform);
+			}
+			if(sign(hsp) != sign(platformContact.hsp)) {
+				while (!place_meeting(x + sign(hsp), y, oMovingPlatform)) {
+					x = x + sign(hsp);
+				}
+			}
+		
+			onground = 0;
+			hsp = platformContact.hsp;
+			hsp_frac = 0;
 		}
-		hsp = 0;
-		hsp_frac = 0;
 	}
 
 
@@ -706,14 +715,14 @@ if (state == states.dead) {
 		vsp_frac = 0;
 	}
 	
-	if (place_meeting(x, y + vsp, oMovingPlatform)) {
+	if (place_meeting(x, y + vsp, oMovingPlatform) && platformContact = 0) {
 		while(!place_meeting(x, y + sign(vsp), oMovingPlatform)) {
 			y = y + sign(vsp);	
 		}
 		vsp = 0;
 		vsp_frac = 0;
 	}
-
+	
 	//check for vertical collision
 	if (place_meeting(x, y + vsp ,oWall)) {
 		while (!place_meeting(x, y + sign(vsp), oWall)) {
@@ -749,13 +758,15 @@ if (state == states.dead) {
 	var last_onground = onground;
 	onground = place_meeting(x, y + 1, oWall);
 	
-	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform)) {
+	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform) && platformContact == 0) {
 		onground = 1;	
 		if(place_meeting(x, y + 1, oMovingPlatform)) {
-			x += place_meeting(x, y + 1, oMovingPlatform).hsp;
+			x += instance_place(x, y + 1, oMovingPlatform).hsp;
 		}
 	}
-
+	
+	platformContact = 0;
+	
 	if(last_onground == 0 && onground == 1) {
 		audio_sound_pitch(land, choose(0.7, 0.8, 0.9, 1));
 		audio_play_sound(land, 1, false);	
@@ -764,7 +775,9 @@ if (state == states.dead) {
 
 
 	onwall = min(place_meeting(x+1, y - 15 , oWall), place_meeting(x+1, y + 4, oWall)) - min(place_meeting(x-1, y + 4, oWall), place_meeting(x-1, y - 15, oWall));
-
+	if(onwall = 0) {
+		onwall = min(place_meeting(x+1, y - 15 , oMovingPlatform), place_meeting(x+1, y + 4, oMovingPlatform)) - min(place_meeting(x-1, y + 4, oMovingPlatform), place_meeting(x-1, y - 15, oMovingPlatform));
+	}
 	if(sign(move) != sign(onwall)) {
 		onwall = 0;	
 	}

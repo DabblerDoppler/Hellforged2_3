@@ -34,9 +34,9 @@ if(down_frames == 1) {
 	up_frames = move_frame_max;
 }
 if (oPlayer.isBusy) {
-sprite_index = sBeholderLargeMask;	
+mask_index = sBeholderLargeMask;	
 } else {
-	sprite_index = sBeholder;	
+	mask_index = sBeholder;	
 }
 
 

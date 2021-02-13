@@ -260,6 +260,7 @@
     {"id":{"name":"snd_moveselect","path":"sounds/snd_moveselect/snd_moveselect.yy",},"order":3,},
     {"id":{"name":"mainlev_build_export_115","path":"sprites/mainlev_build_export_115/mainlev_build_export_115.yy",},"order":116,},
     {"id":{"name":"sIncorrect","path":"sounds/sIncorrect/sIncorrect.yy",},"order":19,},
+    {"id":{"name":"rLevel7","path":"rooms/rLevel7/rLevel7.yy",},"order":10,},
     {"id":{"name":"Approach","path":"scripts/Approach/Approach.yy",},"order":0,},
     {"id":{"name":"ScreenShake","path":"scripts/ScreenShake/ScreenShake.yy",},"order":1,},
     {"id":{"name":"scr_menu","path":"scripts/scr_menu/scr_menu.yy",},"order":2,},
@@ -530,6 +531,7 @@
     {"name":"rLevel4","path":"rooms/rLevel4/rLevel4.yy",},
     {"name":"rLevel5","path":"rooms/rLevel5/rLevel5.yy",},
     {"name":"rLevel6","path":"rooms/rLevel6/rLevel6.yy",},
+    {"name":"rLevel7","path":"rooms/rLevel7/rLevel7.yy",},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":0,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},

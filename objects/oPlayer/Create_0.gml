@@ -42,6 +42,7 @@ gib_number = 40;
 
 global.killShakeConstant = 7;
 
+platformContact = 0;
 hsp = 0;
 vsp = 0;
 hsp_frac = 0;
@@ -223,5 +224,3 @@ pitchArray[10] = sD;
 pitchArray[11] = sDsharp;
 pitchArray[12] = sEhigh;
 
-
-//killSound[0] = 
