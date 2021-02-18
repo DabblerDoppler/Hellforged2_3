@@ -96,15 +96,26 @@ if (gamepad_button_check_pressed(0, gp_face3)) {
 	key_abil1 = 1; 
 	controller = 1;
 }
+if (gamepad_button_check(0, gp_face3)) { 
+	key_abil1_held =1; 
+	controller = 1;
+}
 if (gamepad_button_check_pressed(0, gp_face4)) { 
 	key_abil2 = 1; 
+	controller = 1;
+}
+if (gamepad_button_check(0, gp_face4)) { 
+	key_abil2_held = 1; 
 	controller = 1;
 }
 if (gamepad_button_check_pressed(0, gp_face2)) { 
 	key_abil3 = 1; 
 	controller = 1;
 }
-
+if (gamepad_button_check(0, gp_face2)) { 
+	key_abil3_held =1; 
+	controller = 1;
+}
 
 updown = key_up - key_down;
 leftright = key_right - key_left;
@@ -302,7 +313,7 @@ if (state == states.dead) {
 
 	if(hammerdelay > 0 || hammerswingdelay > 0 || kamaWallDelay_Jump ||kamaWallDelay || lungedelay || kamaDelay != 0 || uppercutdelay != 0 || stylekillwaitdelay != 0 || stylekilldelay != 0 || stylekilljumpdelay !=0 || dashdelay != 0) { isBusyAbility = true; } 
 	if(walljumpdelay != 0 || isBusyAbility) { isBusy = true; }
-
+	
 
 	if (move != 0 && (!isBusyAbility) ) { last_move = 1 * sign(move); }
 
@@ -464,6 +475,7 @@ if (state == states.dead) {
 
 	//check if we can perform a dash
 	if ((key_dash || dash_buffer > 0) && !isBusyAbility && !dash_used) {
+		dashafterdelay = 0;
 		audio_play_sound(dash, 2, false);
 		audio_sound_pitch(dash, choose(0.9, 1, 1.1));
 		isBusyAbility = true;
@@ -797,6 +809,7 @@ if (state == states.dead) {
 
 	if(onground || (onwall != 0) &! uppercutdelay > 0) { lungedelay = false; }
 
+
 	if (last_onground == 0 && onground == 1) { landing_frames = landing_frames_max; }
 
 
@@ -838,7 +851,8 @@ if (state == states.dead) {
 
 
 	//animation selection
-
+	//this should definitely be a switch statement but I didn't know that when I made it originally
+	//and didn't want to touch it
 	if(onground && !isBusyAbility && move > 0) {
 		sprite_index = sPlayerRunRight;
 		image_speed = 1;
@@ -1031,6 +1045,11 @@ if (state == states.dead) {
 	if(move != 0) {
 		last_move = move;	
 	}
+	
+	if(lungedelay && hsp = 0) {
+		lungedelay = false;	
+	}
+
 	
 	
 	springDelay = max(0, springDelay - 1);
