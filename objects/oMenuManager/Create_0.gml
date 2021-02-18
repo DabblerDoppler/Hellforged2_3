@@ -8,7 +8,7 @@ menu[0] = "Start";
 menu[1] = "Continue";
 menu[2] = "Level Select";
 menu[3] = "Options";
-menu[4] = "Credits";
+menu[4] = "Credits/Controls";
 menu[5] = "Quit";
 
 menuDelay = 0;

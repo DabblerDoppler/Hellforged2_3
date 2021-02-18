@@ -20,7 +20,7 @@ reset_dialogue_defaults();
 myPortrait			= spr_portrait_player;
 myVoice				= snd_voice2;
 myFont				= fnt_dialogue;
-myName				= "You";
+myName				= "Kaito";
 
 myPortraitTalk		= spr_portrait_examplechar_mouth;
 myPortraitTalk_x	= 26;

@@ -5,10 +5,5 @@ if(oPlayer.uppercutdelay == 0) {
 	}
 }
 
-if(oPlayer.dashdelay > 0 || oPlayer.lungedelay) {
-	instance_destroy(self);	
-}
-
-
 x = oPlayer.x;
 y = oPlayer.y;

@@ -1,7 +1,6 @@
 deadFor = 0;
 deadDuration = 60;
 
-
 ideal_width = 0;
 ideal_height = 768;
 
@@ -13,7 +12,6 @@ if(ideal_width & 1) {
 	ideal_width++;	
 }
 
-global.music = mMenuMusic;
 
 
 surface_resize(application_surface, ideal_width, ideal_height);
