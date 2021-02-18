@@ -26,8 +26,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "UI_Internal",
+    "path": "folders/Objects/UI_Internal.yy",
   },
   "resourceVersion": "1.0",
   "name": "oBloodSurface",

@@ -8,7 +8,7 @@ function ScreenShake(argument0, argument1) {
 			shake_length = argument1;
 			shake_remain = argument0;
 			shake_magnitude = argument0;
-			gamepad_set_vibration(0, argument0 / 2, argument0 / 2);
+			gamepad_set_vibration(0, argument0 , argument0 );
 			oGame.alarm[0] = argument1 * 1.5;
 		}
 
