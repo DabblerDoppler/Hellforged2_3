@@ -6,7 +6,8 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 
 	key_escape = keyboard_check_pressed(vk_escape);
 	key_f3 = keyboard_check_pressed(vk_f3);
-
+	
+	
 	if (gamepad_button_check_pressed(0, gp_start)) {
 		key_escape = 1;	
 	}
@@ -43,22 +44,55 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 		}
 	
 		var push = keyboard_check_pressed(vk_enter) + keyboard_check_pressed(ord("Z")) + gamepad_button_check_pressed(0, gp_face1);
+		var back = gamepad_button_check_pressed(0, gp_face2) + keyboard_check_pressed(ord("X"));
+		
+		if(back >= 1) {
+			if(menuSelect == 0) {
+				global.pause = false;
+				scr_saveOptions();
+			} else {
+				menuSelect = 0;
+				menu = menuBase;
+				mpos = 0;
+			}
+		}
+		
 		if (push >= 1) {
-			if (mpos == 0) {
-				global.pause = false;
-			} else if (mpos == 1) {
-				if(oPlayer.onground == 1) {
-				global.pause = false;
-				event_user(0);
-				} else {
-					audio_play_sound(sIncorrect, 6, false);
+			if(menuSelect == 0) {
+				if (mpos == 0) {
+					global.pause = false;
+				} else if (mpos == 1) {
+					if(oPlayer.onground == 1) {
+					global.pause = false;
+					event_user(0);
+					} else {
+						audio_play_sound(sIncorrect, 6, false);
+					}
+				
+				
+				} else if(mpos == 2) {
+					scr_SlideTransition(TRANS_MODE.GOTO, room_first);
+				
+				} else if (mpos == 3) {
+					menuSelect = 1;
+					menu = menuOpt;
+					mpos = 0;
+				} else if (mpos == 4) {
+					scr_saveOptions();
+					game_end()
+				}
+			}
+			else if(menuSelect == 1) {
+				if(mpos == 0) {
+					menuSelect = 0;
+					menu = menuBase;
+					mpos = 0;
+				} else if (mpos == 1) {
+					global.vibrationOn = !global.vibrationOn;
+				} else if (mpos == 2) {
+					global.musicVolume = !global.musicVolume;
 				}
 				
-				
-			} else if(mpos == 2) {
-				scr_SlideTransition(TRANS_MODE.GOTO, room_first);
-			} else if (mpos == 3) {
-				game_end()
 			}
 		}
 	} else {
@@ -72,5 +106,8 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 if(gamepad_button_check_pressed(0, gp_start)) {
 	if((room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  && !instance_exists(obj_textbox)) {
 		global.pause = !global.pause;
+		menuSelect = 0;
+		menu = menuBase;
+		mpos = 0;
 	}
 }

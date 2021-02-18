@@ -960,6 +960,7 @@ if (state == states.dead) {
 		isDead = 1;
 		y += 32;
 		oGame.deadDuration = 1;
+		ScreenShake(global.killShakeConstant,30);
 		audio_play_sound(playerdeath, 7, false);
 	}
 	

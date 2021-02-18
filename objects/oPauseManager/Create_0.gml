@@ -4,10 +4,21 @@ image_alpha = 0;
 
 global.PauseManagerID = id;
 
-menu[0] = "Resume"
-menu[1] = "Chat";
-menu[2] = "Main Menu";
-menu[3] = "Quit";
+
+
+menuBase[0] = "Resume"
+menuBase[1] = "Chat";
+menuBase[2] = "Main Menu";
+menuBase[3] = "Options";
+menuBase[4] = "Quit";
+
+menuOpt[0] = "Back"
+menuOpt[1] = "Controller Vibration";
+menuOpt[2] = "Music";
+
+menu = menuBase;
+
+menuSelect = 0;
 
 menuDelay = 0;
 menuDelayMax = 10;

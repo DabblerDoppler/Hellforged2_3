@@ -12,6 +12,9 @@ if(deadFor >= deadDuration) {
 	scr_SlideTransition(TRANS_MODE.RESTART);
 }
 
+audio_sound_gain(global.music, global.musicVolume, 0);
+
+
 /*
 if(audio_sound_get_gain(mMenuMusic) <=0) {
 	audio_stop_sound(mMenuMusic);

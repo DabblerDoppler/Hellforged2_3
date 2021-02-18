@@ -47,6 +47,7 @@
     {"id":{"name":"mainlev_build_export_103","path":"sprites/mainlev_build_export_103/mainlev_build_export_103.yy",},"order":104,},
     {"id":{"name":"mainlev_build_export_14","path":"sprites/mainlev_build_export_14/mainlev_build_export_14.yy",},"order":15,},
     {"id":{"name":"sPlayerFallRight","path":"sprites/sPlayerFallRight/sPlayerFallRight.yy",},"order":15,},
+    {"id":{"name":"scr_saveOptions","path":"scripts/scr_saveOptions/scr_saveOptions.yy",},"order":10,},
     {"id":{"name":"mainlev_build_export_10","path":"sprites/mainlev_build_export_10/mainlev_build_export_10.yy",},"order":11,},
     {"id":{"name":"sPlayerLandLeft","path":"sprites/sPlayerLandLeft/sPlayerLandLeft.yy",},"order":16,},
     {"id":{"name":"mainlev_build_export_180","path":"sprites/mainlev_build_export_180/mainlev_build_export_180.yy",},"order":181,},
