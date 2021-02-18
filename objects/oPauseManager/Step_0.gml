@@ -69,12 +69,8 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 	global.pause = 0;
 }
 
-if(keyboard_key_press(vk_escape) || gamepad_button_check_pressed(0, gp_start)) {
+if(gamepad_button_check_pressed(0, gp_start)) {
 	if((room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  && !instance_exists(obj_textbox)) {
-		if(global.pause == 1) {
-			global.pause = 0;	
-		} else {
-			global.pause = 1;	
-		}
+		global.pause = !global.pause;
 	}
 }
