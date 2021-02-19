@@ -853,104 +853,104 @@ if (state == states.dead) {
 	//animation selection
 	//this should definitely be a switch statement but I didn't know that when I made it originally
 	//and didn't want to touch it
-	if(onground && !isBusyAbility && move > 0) {
-		sprite_index = sPlayerRunRight;
+	//Actually a switch statement can't fix this, I should be setting the sprite when an event happens, or use a 
+	//state machine for abilities. 
+	
+	if(onground && !isBusyAbility) {
 		image_speed = 1;
-	} else if (onground && !isBusyAbility && move < 0) {
-		sprite_index = sPlayerRunLeft;	
-		image_speed = 1;
+		if(move > 0) {
+			sprite_index = sPlayerRunRight;	
+		} else if (move < 0) {
+			sprite_index = sPlayerRunLeft;
+		} else {
+			if(last_move > 0) {
+				sprite_index = sPlayerIdleRight; 
+			} else {	
+				sprite_index = sPlayerIdleLeft;	
+			}
+		}			
 	} else if (dashdelay > 0) {
 		image_speed = 0;
-		if (v_dash_dir > 0 && h_dash_dir == 0) {
-			sprite_index = sPlayerDashUp;
-		} else if (v_dash_dir > 0 && h_dash_dir > 0) {
-			sprite_index = sPlayerDashUpRight;
-		} else if (v_dash_dir > 0) {
-			sprite_index = sPlayerDashUpLeft;	
-		} else if (v_dash_dir == 0) {
-				if (last_move < 0) {
-					sprite_index = sPlayerDashLeft;
-				} else { sprite_index = sPlayerDashRight; }
-		} else if (v_dash_dir < 0 && h_dash_dir == 0) {
-			sprite_index = sPlayerDashUp;
-		} else if (v_dash_dir < 0 && h_dash_dir > 0) {
-			sprite_index = sPlayerDashDownRight;
-		} else if (v_dash_dir < 0) {
-			sprite_index = sPlayerDashDownLeft;
+				if (v_dash_dir > 0) {
+					if(h_dash_dir == 0) {
+						sprite_index = sPlayerDashUp;
+					} else if (h_dash_dir > 0) {
+						sprite_index = sPlayerDashUpRight;
+					} else {
+						sprite_index = sPlayerDashUpLeft;
+					}
+				}
+				else if (v_dash_dir == 0) {
+					if (last_move < 0) {
+						sprite_index = sPlayerDashLeft;
+					} else { sprite_index = sPlayerDashRight; }
+				}
+				else {
+					if (h_dash_dir == 0) {
+						sprite_index = sPlayerDashDown;
+					} else if (h_dash_dir > 0) {
+						sprite_index = sPlayerDashDownRight;
+					} else {
+						sprite_index = sPlayerDashDownLeft;
+					}
+				}
+	} else if (uppercutdelay != 0) {
+		image_speed = 1;
+		if(last_move > 0) {
+			sprite_index = sPlayerUppercutRight;
+		} else {	
+			sprite_index = sPlayerUppercutLeft;
 		}
-	
-	} else if (last_move < 0 && kamaDelay > 0) {
-		sprite_index = sPlayerThrowLeft;
-		if (image_index >= 2) {
-			image_speed = 0;
+	} else if(stylekilldelay > 0) {
+		image_speed = 1;		
+		if(last_move <= 0) {
+			sprite_index = sPlayerStabRight;
 		} else {
-			image_speed = 1;
+			sprite_index = sPlayerStabLeft;	
 		}
-	} else if (last_move > 0 && kamaDelay > 0) {
-		sprite_index = sPlayerThrowRight;
-		if (image_index >= 2) {
-			image_speed = 0;
+	} else if (lungedelay == true || stylekillwaitdelay > 0) {
+		image_speed = 1;
+		if(last_move > 0) {
+			sprite_index = sPlayerLungeRight;
 		} else {
-			image_speed = 1;
+			sprite_index = sPlayerLungeLeft;	
 		}
-	} else if (uppercutdelay != 0 && last_move > 0) {
-		sprite_index = sPlayerUppercutRight;	
+	} else if (landing_frames > 0) {
 		image_speed = 1;
-	} else if (uppercutdelay != 0 && last_move < 0) {
-		sprite_index = sPlayerUppercutLeft;
-		image_speed = 1;
-	} else if(stylekilldelay > 0 && last_move <= 0) {
-		sprite_index = sPlayerStabRight;
-		image_speed = 1;
-		if(image_index == 0 ) {
-			image_speed = 5;	
+		if(last_move > 0) {
+			sprite_index = sPlayerLandRight;
+		} else {
+			sprite_index = sPlayerLandLeft;
 		}
-	} else if(stylekilldelay > 0 && last_move > 0) {
-		sprite_index = sPlayerStabLeft;
-		image_speed = 1;
-		if(image_index == 0 ) {
-			image_speed = 5;	
-		}
-	} else if (((lungedelay == true || stylekillwaitdelay > 0) && last_move > 0)){
-		sprite_index = sPlayerLungeRight;
-		image_speed = 1;
-	} else if (((lungedelay == true || stylekillwaitdelay > 0) && last_move < 0 )){
-		sprite_index = sPlayerLungeLeft;	
-		image_speed = 1;
-	} else if (landing_frames > 0 && last_move > 0) {
-		sprite_index = sPlayerLandRight;
-		image_speed = 1;	
-	} else if (landing_frames > 0 && last_move < 0) {
-		sprite_index = sPlayerLandLeft;
-		image_speed = 1;	
-	} else if (onground && last_move > 0) { 
-		sprite_index = sPlayerIdleRight; 
-	} else if (onground && last_move < 0) {
-		sprite_index = sPlayerIdleLeft;	
+		
 	} else if (onwall > 0) {
 		sprite_index = sPlayerSlideRight;	
 	} else if (onwall < 0 ) {
 		sprite_index = sPlayerSlideLeft;	
-	} else if (walljumpdelay > 0 && hsp > 0) {
-		sprite_index = sPlayerJumpRight;	
-	} else if (walljumpdelay > 0 && hsp < 0) {
-		sprite_index = sPlayerJumpLeft;	
-	} else if (vsp < 0 && !onground && last_move > 0) {
-		sprite_index = sPlayerJumpRight;
+		
+	} else if (walljumpdelay > 0) {
+		if(hsp > 0) {
+			sprite_index = sPlayerJumpRight;
+		} else {
+			sprite_index = sPlayerJumpLeft;
+		}
+	} else if (vsp < 0 && !onground) {
 		if (image_index == 5) {
 			image_speed = 0;	
 		} else { image_speed = 0.2; }
-	} else if (vsp < 0 && !onground && last_move < 0) {
-		sprite_index = sPlayerJumpLeft;
-		if (image_index == 5) {
-			image_speed = 0;
-		} else { image_speed = 0.2;}
-	} else if (!onground && vsp >= 0 && last_move < 0) {
-		image_speed = 0.2;
-		sprite_index = sPlayerFallLeft;
-	} else if (! onground && vsp >= 0 && last_move > 0) {
-		image_speed = 0.2;
-		sprite_index = sPlayerFallRight;
+		
+		if(last_move > 0) {
+			sprite_index = sPlayerJumpRight;
+		} else {
+			sprite_index = sPlayerJumpLeft;
+		}
+	} else if(!onground && vsp >= 0) {
+		image_speed = 0.2	
+		if(last_move > 0) {
+			sprite_index = sPlayerFallRight;
+		} else {
+			sprite_index = sPlayerFallLeft;	
+		}
 	} else { sprite_index = sPlayer; }
 
 
@@ -964,82 +964,6 @@ if (state == states.dead) {
 		audio_play_sound(playerdeath, 7, false);
 	}
 	
-	
-} else if (state == states.swinging) {
-	var _ropeAngleAcceleration = -0.2 * dcos(ropeAngle);
-	ropeAngleVelocity += _ropeAngleAcceleration;
-	ropeAngle += ropeAngleVelocity;
-	ropeAngle *= 0.99;
-	ropeX = grappleX + lengthdir_x(ropeLength, ropeAngle);
-	ropeY = grappleY + lengthdir_y(ropeLength, ropeAngle);
-	
-	hsp = ropeX - x;
-	vsp = ropeY - y;
-	
-	if (key_kama_held == 0) {	
-		state = states.normal; 
-	}
-	
-	//check for horizontal collision
-	if (place_meeting(x+hsp,y,oWall)) {
-		while (!place_meeting(x+sign(hsp), y, oWall)) {
-			x = x + sign(hsp);
-		}
-		state = states.normal;
-		//corner correction
-		if (hsp != 0 && corner_delay == 0) {
-			if(!(place_meeting(x + hsp, y + v_corner_correction, oWall))) {
-				y = y + v_corner_correction;
-				corner_delay = corner_delay_max;
-			} else if (!(place_meeting(x + hsp, y - v_corner_correction, oWall))) {
-				y = y - v_corner_correction;
-				corner_delay = corner_delay_max;
-			} else {
-			hsp = 0;
-			hsp_frac = 0;
-			}
-		
-		} else {
-		hsp = 0;
-		hsp_frac = 0;
-		}
-	}
-
-
-
-	//x = current x plus velocity
-	x = x + hsp;
-
-	//check for vertical collision
-	if (place_meeting(x, y + vsp ,oWall)) {
-		while (!place_meeting(x, y + sign(vsp), oWall)) {
-			y = y + sign(vsp);
-		}
-		state = states.normal;
-		//corner correction
-		if (vsp < 0 && corner_delay == 0) {
-			if(!(place_meeting(x + h_corner_correction, y + vsp, oWall))) {
-				x += h_corner_correction;
-				corner_delay = corner_delay_max;
-			} else if (!(place_meeting(x - h_corner_correction, y + vsp, oWall))) {
-				x -= h_corner_correction;
-				corner_delay = corner_delay_max
-			} else {
-			vsp = 0;
-			vsp_frac = 0;
-			}
-		} else {
-		vsp = 0;
-		vsp_frac = 0;
-		
-		}
-	}
-
-
-	//if you hit your head on a corner when moving upwards or downwards, it will move you to the side.
-
-	// y = current y + velocity
-	y = y + vsp;
 	
 } else if (state = states.bouncing) {
 	move = key_right - key_left;
@@ -1124,30 +1048,34 @@ if (state == states.dead) {
 	
 	
 	if(springDelay == 0) {
-		if(bounceDirection == "Up") {
-			if(springJump) {
-				vsp = -10;
-			} else {
-				vsp = -8;	
-			}
-		} else if (bounceDirection == "Left") {
-			walljumpdelay = walljumpdelay_max;
-			if(springJump) {
-				vsp = -7;
-				hsp = -9;
-			} else {
-				vsp = -5;
-				hsp = -7;
-			}	
-		} else if (bounceDirection == "Right") {
-			walljumpdelay = walljumpdelay_max;
-			if(springJump) {
-				vsp = -7;
-				hsp = 9;
-			} else {
-				vsp = -5;
-				hsp = 7;
-			}
+		switch bounceDirection {
+			case "Up":
+				if(springJump) {
+					vsp = -10;
+				} else {
+					vsp = -8;	
+				}
+			break;
+			case "Left":
+				walljumpdelay = walljumpdelay_max;
+				if(springJump) {
+					vsp = -7;
+					hsp = -9;
+				} else {
+					vsp = -5;
+					hsp = -7;
+				}	
+			break;
+			case "Right":
+				walljumpdelay = walljumpdelay_max;
+				if(springJump) {
+					vsp = -7;
+					hsp = 9;
+				} else {
+					vsp = -5;
+					hsp = 7;
+				}
+			break;
 		}
 		
 		

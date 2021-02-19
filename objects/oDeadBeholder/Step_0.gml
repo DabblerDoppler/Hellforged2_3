@@ -21,7 +21,11 @@ if (image_index < 1) {
 }
 
 if(image_alpha > 0.5) {
-	scr_targeted_blood(1, self);
+	if(image_index < 2) {
+		scr_targeted_blood(1, self, -5);
+	} else {
+		scr_targeted_blood(1, self);
+	}
 }
 
 if((oPlayer.stylekilldelay > 0 || oPlayer.stylekillwaitdelay > 0) && image_index == 0) {
