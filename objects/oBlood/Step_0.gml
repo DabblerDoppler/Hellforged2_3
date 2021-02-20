@@ -1,4 +1,5 @@
 
+speed /= global.timeSlow;
 
 if(collision_point(x, y, oWall, false, false) || collision_point(x,y,oBloodWall, false, false)) {
 	visible = false;
@@ -28,3 +29,5 @@ if(collision_point(x, y, oWall, false, false) || collision_point(x,y,oBloodWall,
 if(image_alpha == 0) {
 	instance_destroy();	
 }
+
+speed *= global.timeSlow;

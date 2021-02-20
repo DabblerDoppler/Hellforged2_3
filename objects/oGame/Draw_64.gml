@@ -1,6 +1,8 @@
 //this should be done with shaders instead probably
 //i could also make a sprite around the edges of the screen
 
+
+
 if(instance_exists(oPlayer)) {
 	if(oPlayer.isDead) {
 		draw_set_color(c_red);

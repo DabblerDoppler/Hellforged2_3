@@ -15,6 +15,7 @@ menuBase[4] = "Quit";
 menuOpt[0] = "Back"
 menuOpt[1] = "Controller Vibration";
 menuOpt[2] = "Music";
+menuOpt[3] = "Easy Mode";
 
 menu = menuBase;
 

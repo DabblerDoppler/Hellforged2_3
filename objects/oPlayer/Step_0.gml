@@ -20,6 +20,14 @@ if(gamepad_button_check(0, gp_select)) {
 //state machine
 if(isDead) {
 	state = states.dead;
+	global.timeSlow = 1.0;
+} else {
+	//time slow
+	if((keyboard_check(vk_shift) || gamepad_button_check(0, gp_shoulderr)) && global.easyMode) {
+		global.timeSlow = 0.6
+	} else if (keyboard_check_released(vk_shift) || gamepad_button_check_released(0, gp_shoulderr) && global.easyMode) {
+		global.timeSlow = 1;
+	}
 }
 
 
@@ -274,37 +282,38 @@ if (state == states.dead) {
 		vsp = 0;
 		vsp_frac = 0;
 	}
-	y = y + vsp;
+	y += (vsp * global.timeSlow);
 	exit;
 } else if (state = states.normal) {
+	
 
 	//temporary variable: -1 is attempting to move left, 0 is still, 1 is right
 	var move = key_right - key_left;
 	//this way we can face the direction we last pressed.
 
 	//delays
-	springAfterDelay = max(springAfterDelay - 1, 0);
-	dashafterdelay = max(dashafterdelay - 1, 0);
-	hammerdelay = max(hammerdelay - 1, 0);
-	hammerswingdelay = max(hammerswingdelay - 1, 0);
-	kamaJumpDelay = max(kamaJumpDelay - 1, 0);
-	kamaWallDelay_Jump = max(kamaWallDelay_Jump - 1, 0);
-	corner_delay = max(corner_delay - 1, 0);
-	uppercut_buffer = max(uppercut_buffer - 1, 0);
-	kama_buffer = max(kama_buffer - 1, 0);
-	lunge_buffer = max(lunge_buffer - 1, 0);
-	dash_buffer = max(dash_buffer - 1, 0);
-	jumpBuffer = max(jumpBuffer - 1, 0);
-	coyoteTime = max(coyoteTime - 1, 0);
-	coyoteTime_Wall = max(coyoteTime_Wall - 1, 0);
-	landing_frames = max(landing_frames - 1, 0);
-	dashdelay = max(dashdelay - 1, 0);
-	stylekillwaitdelay = max(stylekillwaitdelay - 1, 0);
-	stylekilljumpdelay = max(stylekilljumpdelay - 1, 0);
-	stylekilldelay = max(stylekilldelay - 1, 0);
-	walljumpdelay = max(walljumpdelay - 1, 0);
-	uppercutdelay = max(uppercutdelay - 1, 0);
-	kamaDelay = max (kamaDelay - 1, 0);
+	springAfterDelay = max(springAfterDelay - (1 * global.timeSlow), 0);
+	dashafterdelay = max(dashafterdelay - (1 * global.timeSlow), 0);
+	hammerdelay = max(hammerdelay - (1 * global.timeSlow), 0);
+	hammerswingdelay = max(hammerswingdelay - (1 * global.timeSlow), 0);
+	kamaJumpDelay = max(kamaJumpDelay - (1 * global.timeSlow), 0);
+	kamaWallDelay_Jump = max(kamaWallDelay_Jump - (1 * global.timeSlow), 0);
+	corner_delay = max(corner_delay - (1 * global.timeSlow), 0);
+	uppercut_buffer = max(uppercut_buffer - (1 * global.timeSlow), 0);
+	kama_buffer = max(kama_buffer - (1 * global.timeSlow), 0);
+	lunge_buffer = max(lunge_buffer - (1 * global.timeSlow), 0);
+	dash_buffer = max(dash_buffer - (1 * global.timeSlow), 0);
+	jumpBuffer = max(jumpBuffer - (1 * global.timeSlow), 0);
+	coyoteTime = max(coyoteTime - (1 * global.timeSlow), 0);
+	coyoteTime_Wall = max(coyoteTime_Wall - (1 * global.timeSlow), 0);
+	landing_frames = max(landing_frames - (1 * global.timeSlow), 0);
+	dashdelay = max(dashdelay - (1 * global.timeSlow), 0);
+	stylekillwaitdelay = max(stylekillwaitdelay - (1 * global.timeSlow), 0);
+	stylekilljumpdelay = max(stylekilljumpdelay - (1 * global.timeSlow), 0);
+	stylekilldelay = max(stylekilldelay - (1 * global.timeSlow), 0);
+	walljumpdelay = max(walljumpdelay - (1 * global.timeSlow), 0);
+	uppercutdelay = max(uppercutdelay - (1 * global.timeSlow), 0);
+	kamaDelay = max (kamaDelay - (1 * global.timeSlow), 0);
 
 
 
@@ -387,8 +396,9 @@ if (state == states.dead) {
 
 
 	//fall based on gravity.
-	if (stylekilldelay == 0 && hammerswingdelay == 0 && stylekillwaitdelay == 0 && dashdelay == 0 && !kamaWallDelay) {
-		vsp += grv_final;
+	if (stylekilldelay <= 0 && stylekillwaitdelay <= 0 && dashdelay <= 0 ) {
+		vsp += (global.timeSlow * grv_final);
+		
 		vsp = clamp(vsp,-vsp_max_final, vsp_max_final);
 	}
 
@@ -409,67 +419,6 @@ if (state == states.dead) {
 
 	if ((dashafterdelay > 0 && uppercutdelay == 0) || (vsp < 0 && hammerswingdelay == 0 && !key_jump_held && !key_uppercut_held && !isBusyAbility && dashdelay == 0 && kamaDelay == 0 && !kamaWallDelay && springAfterDelay == 0)) {
 			vsp = max(vsp,-2);
-	}
-
-	//kama rope swing code
-	if((key_kama || kama_buffer > 0) && !isBusyAbility && !kama_used) {
-				grappleX = mouse_x;
-				grappleY = mouse_y;
-				ropeX = x;
-				ropeY = y;
-				ropeAngle = point_direction(grappleX, grappleY, x, y);
-				ropeLength = point_distance(grappleX, grappleY, x, y);
-				ropeAngleVelocity = sqrt(abs(hsp^2 + vsp ^2));
-				state = states.swinging;
-	
-		kama_buffer = 0;
-		isBusy = true;
-		isBusyAbility = true;
-		if(kamaBound == 1) {
-			abil1_used = true;
-		} else if (kamaBound == 2) {
-			abil2_used = true;
-		} else if (kamaBound == 3) {
-			abil3_used = true;
-		}
-		
-	}
-
-	if (isBusyAbility && key_kama) {
-		kama_buffer = ability_buffer_max;	
-	}
-
-
-	//hammer swing
-	if ((key_hammer || hammer_buffer > 0) && !isBusyAbility && !hammer_used) {
-		hammer_buffer = 0;
-		isBusyAbility = true;
-		isBusy = true;
-		lastUsed = 5;
-	
-		if(hammerBound == 1) {
-			abil1_used = true;
-		} else if (hammerBound == 2) {
-			abil2_used = true;
-		} else if (hammerBound == 3) {
-			abil3_used = true;
-		}
-	
-		hammerdelay = hammerdelay_max;
-		vsp = -4;
-		hsp = last_move * 4;
-		hsp_frac = 0;
-		vsp_frac = 0;
-	} else if (isBusyAbility && key_hammer) {
-		hammer_buffer = ability_buffer_max;	
-	}
-
-	if(hammerdelay == 1) {
-		hsp = 0;
-		vsp = 0;
-		hsp_frac = 0;
-		vsp_frac = 0;
-		hammerswingdelay = hammerswingdelay_max;	
 	}
 
 
@@ -589,7 +538,7 @@ if (state == states.dead) {
 	}
 
 	//style kill code
-	if (stylekillwaitdelay == 1) {
+	if (stylekillwaitdelay <= 1 && stylekillwaitdelay > 0) {
 			instance_create_layer(x,y, "Instances", oAfterimage);
 			stylekilldelay = stylekilldelay_max;
 			if(stylekilltarget == oDeadBeholderKama) {
@@ -632,7 +581,8 @@ if (state == states.dead) {
 	}
 
 	//this is the code for actually killing the style kill target.
-	if (stylekilldelay == 1) {
+	if (stylekilldelay <= 1 && stylekilldelay > 0) {
+		stylekilldelay = 0;
 		vsp = -6;
 		hsp = 0;
 		scr_generate_blood(100);
@@ -653,7 +603,7 @@ if (state == states.dead) {
 
 
 
-	if(dashdelay == 0) {
+	if(dashdelay <= 0) {
 		v_corner_correction = v_corner_correction_default;
 		h_corner_correction = h_corner_corection_default;
 		hsp += hsp_frac;
@@ -667,17 +617,18 @@ if (state == states.dead) {
 		h_corner_correction = h_corner_correction_dash;
 	}
 	
-	if(place_meeting(x + hsp, y, oMovingPlatform) || platformContact != 0) {
+
+	if(place_meeting(x + hsp, y, oMovingPlatform) || instance_exists(platformContact)) {
+		//this key_jump is janky but key_jump is pressed not held so its ok
 		if(!key_jump) {
-			if(place_meeting(x + hsp, y, oMovingPlatform)) {
+			if(!instance_exists(platformContact)) {
 				platformContact = instance_place(x + hsp, y, oMovingPlatform);
 			}
-			if(sign(hsp) != sign(platformContact.hsp)) {
-				while (!place_meeting(x + sign(hsp), y, oMovingPlatform)) {
+			if(sign(hsp) != sign(platformContact.hsp) && hsp != 0) {
+				while (!place_meeting(x + sign(hsp), y-1, oMovingPlatform)) {
 					x = x + sign(hsp);
 				}
 			}
-		
 			onground = 0;
 			hsp = platformContact.hsp;
 			hsp_frac = 0;
@@ -712,7 +663,7 @@ if (state == states.dead) {
 
 
 	//x = current x plus velocity
-	x = x + hsp;
+	x += global.timeSlow * hsp;
 
 	//this way we'll stil to a ceiling until the uppercut is over instead of falling
 	if(uppercutdelay > 0 && vsp > 0) {
@@ -765,7 +716,7 @@ if (state == states.dead) {
 
 
 	// y = current y + velocity
-	y = y + vsp;
+	y += (global.timeSlow * vsp);
 
 	var last_onground = onground;
 	onground = place_meeting(x, y + 1, oWall);
@@ -773,7 +724,7 @@ if (state == states.dead) {
 	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform) && platformContact == 0) {
 		onground = 1;	
 		if(place_meeting(x, y + 1, oMovingPlatform)) {
-			x += instance_place(x, y + 1, oMovingPlatform).hsp;
+			x += (global.timeSlow) * instance_place(x, y + 1, oMovingPlatform).hsp;
 		}
 	}
 	
@@ -857,7 +808,7 @@ if (state == states.dead) {
 	//state machine for abilities. 
 	
 	if(onground && !isBusyAbility) {
-		image_speed = 1;
+		image_speed = 1 * global.timeSlow;
 		if(move > 0) {
 			sprite_index = sPlayerRunRight;	
 		} else if (move < 0) {
@@ -895,28 +846,28 @@ if (state == states.dead) {
 					}
 				}
 	} else if (uppercutdelay != 0) {
-		image_speed = 1;
+		image_speed = 1 * global.timeSlow;
 		if(last_move > 0) {
 			sprite_index = sPlayerUppercutRight;
 		} else {	
 			sprite_index = sPlayerUppercutLeft;
 		}
 	} else if(stylekilldelay > 0) {
-		image_speed = 1;		
+		image_speed = 1 * global.timeSlow;		
 		if(last_move <= 0) {
 			sprite_index = sPlayerStabRight;
 		} else {
 			sprite_index = sPlayerStabLeft;	
 		}
 	} else if (lungedelay == true || stylekillwaitdelay > 0) {
-		image_speed = 1;
+		image_speed = 1 * global.timeSlow;
 		if(last_move > 0) {
 			sprite_index = sPlayerLungeRight;
 		} else {
 			sprite_index = sPlayerLungeLeft;	
 		}
 	} else if (landing_frames > 0) {
-		image_speed = 1;
+		image_speed = 1 * global.timeSlow;
 		if(last_move > 0) {
 			sprite_index = sPlayerLandRight;
 		} else {
@@ -937,7 +888,7 @@ if (state == states.dead) {
 	} else if (vsp < 0 && !onground) {
 		if (image_index == 5) {
 			image_speed = 0;	
-		} else { image_speed = 0.2; }
+		} else { image_speed = 0.2 * global.timeSlow; }
 		
 		if(last_move > 0) {
 			sprite_index = sPlayerJumpRight;
@@ -945,7 +896,7 @@ if (state == states.dead) {
 			sprite_index = sPlayerJumpLeft;
 		}
 	} else if(!onground && vsp >= 0) {
-		image_speed = 0.2	
+		image_speed = 0.2 * global.timeSlow;
 		if(last_move > 0) {
 			sprite_index = sPlayerFallRight;
 		} else {
@@ -966,6 +917,9 @@ if (state == states.dead) {
 	
 	
 } else if (state = states.bouncing) {
+	
+
+	
 	move = key_right - key_left;
 	if(move != 0) {
 		last_move = move;	
@@ -977,7 +931,7 @@ if (state == states.dead) {
 
 	
 	
-	springDelay = max(0, springDelay - 1);
+	springDelay = max(0, springDelay - (1 * global.timeSlow));
 	springJump = max(springJump, key_jump);
 	
 	if(jumpBuffer) {
@@ -1011,7 +965,7 @@ if (state == states.dead) {
 
 
 	//x = current x plus velocity
-	x = x + hsp;
+	x += global.timeSlow * hsp;
 
 
 	//check for vertical collision
@@ -1044,7 +998,7 @@ if (state == states.dead) {
 
 
 	// y = current y + velocity
-	y = y + vsp;
+	y += global.timeSlow *  vsp;
 	
 	
 	if(springDelay == 0) {

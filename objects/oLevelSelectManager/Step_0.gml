@@ -28,7 +28,13 @@ if (move != 0 && menuDelay == 0) {
 	if (mpos > array_length_1d(menu) -1) { mpos = 0; }
 }
 
+var back = keyboard_check_pressed(ord("X")) + gamepad_button_check_pressed(0, gp_face2);
+if (back >= 1) { 
+	scr_SlideTransition(TRANS_MODE.GOTO, rMainMenu); 
+	}
+
+
 var push = keyboard_check_pressed(vk_enter) + keyboard_check_pressed(ord("Z")) + gamepad_button_check_pressed(0, gp_face1);
 if (push >= 1) { 
-	scr_SlideTransition(TRANS_MODE.GOTO, level[mpos]); 
+	scr_SlideTransition(TRANS_MODE.GOTO, global.level[mpos]); 
 	}

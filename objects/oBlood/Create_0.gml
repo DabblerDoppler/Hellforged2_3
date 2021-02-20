@@ -1,7 +1,5 @@
-hspeed = 0;
-vspeed = 0;
-
 gravity = 0.25;
+
 image_xscale = irandom_range(1,2);
 image_yscale = irandom_range(1,2);
 

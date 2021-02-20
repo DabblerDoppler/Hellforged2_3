@@ -91,6 +91,19 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 					global.vibrationOn = !global.vibrationOn;
 				} else if (mpos == 2) {
 					global.musicVolume = !global.musicVolume;
+				} else if (mpos == 3) {
+					if(global.easyMode) {
+						global.easyMode = false;
+					} else {
+						global.pause = false;
+						global.easyMode = true;
+						myText[0] = "It looks like you turned easy mode on. No shame in that, the game's difficulty curve is a mess."
+						myText[1] = "While easy mode is on, press Shift or Right Bumper to slow time."
+						mySpeaker[0] = oMuramasa;
+						mySpeaker[1] = oMuramasa;
+						myType = 0;
+						create_dialogue(myText, mySpeaker, myEffects, myTextSpeed, myTypes, myNextLine, myScripts, myTextCol);
+					}
 				}
 				
 			}

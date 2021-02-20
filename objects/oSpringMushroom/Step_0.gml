@@ -34,4 +34,4 @@ if(anim_frames == 14) {
 	image_index = 0;	
 }
 
-x += hsp;
+x += global.timeSlow * hsp;

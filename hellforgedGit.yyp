@@ -499,6 +499,7 @@
     {"id":{"name":"obj_textevent","path":"objects/obj_textevent/obj_textevent.yy",},"order":1,},
     {"id":{"name":"mainlev_build_export_155","path":"sprites/mainlev_build_export_155/mainlev_build_export_155.yy",},"order":156,},
     {"id":{"name":"sTenorC","path":"sounds/sTenorC/sTenorC.yy",},"order":20,},
+    {"id":{"name":"rLevel8","path":"rooms/rLevel8/rLevel8.yy",},"order":11,},
     {"id":{"name":"par_speaker","path":"objects/par_speaker/par_speaker.yy",},"order":2,},
     {"id":{"name":"obj_emote","path":"objects/obj_emote/obj_emote.yy",},"order":3,},
     {"id":{"name":"oMuramasa","path":"objects/oMuramasa/oMuramasa.yy",},"order":0,},
@@ -539,6 +540,7 @@
     {"roomId":{"name":"rLevel5","path":"rooms/rLevel5/rLevel5.yy",},},
     {"roomId":{"name":"rLevel6","path":"rooms/rLevel6/rLevel6.yy",},},
     {"roomId":{"name":"rLevel7","path":"rooms/rLevel7/rLevel7.yy",},},
+    {"roomId":{"name":"rLevel8","path":"rooms/rLevel8/rLevel8.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":0,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
