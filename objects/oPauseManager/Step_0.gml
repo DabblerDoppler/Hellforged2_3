@@ -45,6 +45,29 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 	
 		var push = keyboard_check_pressed(vk_enter) + keyboard_check_pressed(ord("Z")) + gamepad_button_check_pressed(0, gp_face1);
 		var back = gamepad_button_check_pressed(0, gp_face2) + keyboard_check_pressed(ord("X"));
+		var minus = keyboard_check_pressed(vk_left);
+		var plus = keyboard_check_pressed(vk_right);
+		
+		if(abs(gamepad_axis_value(0, gp_axislh)) > .2) {
+			minus -= sign(gamepad_axis_value(0, gp_axislh));
+			plus += sign(gamepad_axis_value(0, gp_axislh));
+		}
+		
+		if(plus && menuSelect == 1) {
+			if(mpos == 2) {
+				global.musicVolume = min(global.musicVolume + 0.05, 1); 
+			} else if(mpos == 4) {
+				global.gameVolume = min(global.gameVolume + 0.05, 1); 
+			}
+		} else if(minus && menuSelect == 1) {
+			if(mpos == 2) {
+				global.musicVolume = max(global.musicVolume - 0.05, 0); 
+			} else if (mpos == 4) {
+				global.gameVolume = max(global.gameVolume - 0.05, 0); 
+			}
+		}
+			
+			
 		
 		if(back >= 1) {
 			if(menuSelect == 0) {
@@ -83,27 +106,43 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect)  {
 				}
 			}
 			else if(menuSelect == 1) {
-				if(mpos == 0) {
-					menuSelect = 0;
-					menu = menuBase;
-					mpos = 0;
-				} else if (mpos == 1) {
-					global.vibrationOn = !global.vibrationOn;
-				} else if (mpos == 2) {
-					global.musicVolume = !global.musicVolume;
-				} else if (mpos == 3) {
-					if(global.easyMode) {
-						global.easyMode = false;
-					} else {
-						global.pause = false;
-						global.easyMode = true;
-						myText[0] = "It looks like you turned easy mode on. No shame in that, the game's difficulty curve is a mess."
-						myText[1] = "While easy mode is on, press Shift or Right Bumper to slow time."
-						mySpeaker[0] = oMuramasa;
-						mySpeaker[1] = oMuramasa;
-						myType = 0;
-						create_dialogue(myText, mySpeaker, myEffects, myTextSpeed, myTypes, myNextLine, myScripts, myTextCol);
-					}
+				switch mpos {
+					case 0: 
+						menuSelect = 0;
+						menu = menuBase;
+						mpos = 0;
+						break;
+					case 1:
+						global.vibrationOn = !global.vibrationOn;
+						break;
+					case 2:
+						if(global.musicVolume == 0.5) {
+							global.musicVolume = 0;
+						} else {
+							global.musicVolume = 0.5;
+						}
+						break;
+					case 3:
+						if(global.easyMode) {
+							global.easyMode = false;
+						} else {
+							global.pause = false;
+							global.easyMode = true;
+							myText[0] = "It looks like you turned easy mode on. No shame in that, the game's difficulty curve is a mess."
+							myText[1] = "While easy mode is on, press Shift or Right Bumper to slow time."
+							mySpeaker[0] = oMuramasa;
+							mySpeaker[1] = oMuramasa;
+							myType = 0;
+							create_dialogue(myText, mySpeaker, myEffects, myTextSpeed, myTypes, myNextLine, myScripts, myTextCol);
+						}
+						break;	
+					case 4:
+						if(global.gameVolume == 0.5) {
+							global.gameVolume = 0;
+						} else {
+							global.gameVolume = 0.5;
+						}
+						break;	
 				}
 				
 			}

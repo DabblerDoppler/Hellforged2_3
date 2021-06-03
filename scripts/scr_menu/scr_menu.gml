@@ -2,7 +2,7 @@ function scr_menu() {
 	switch (mpos) {
 		//start
 		case 0: {
-			scr_SlideTransition(TRANS_MODE.GOTO, rLevel0);
+			scr_SlideTransition(TRANS_MODE.GOTO, global.level[0]);
 			break;
 		}
 		//continue

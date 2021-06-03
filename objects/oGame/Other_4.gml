@@ -29,4 +29,6 @@ file_text_write_real(file, global.vibrationOn);
 
 file_text_write_real(file, global.easyMode);
 
+file_text_write_real(file, global.gameVolume);
+
 file_text_close(file);

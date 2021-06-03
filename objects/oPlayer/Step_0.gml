@@ -46,13 +46,13 @@ key_abil2_held = keyboard_check(kR_abil2);
 key_abil3_held = keyboard_check(kR_abil3);
 
 //these 4 will be for the ability wheel
-key_abil1_select = keyboard_check(kR_abil1_select);
-key_abil2_select = keyboard_check(kR_abil2_select);
-key_abil3_select = keyboard_check(kR_abil3_select);
+//key_abil1_select = keyboard_check(kR_abil1_select);
+//key_abil2_select = keyboard_check(kR_abil2_select);
+//#key_abil3_select = keyboard_check(kR_abil3_select);
 
-key_abil1_select_r = keyboard_check_released(kR_abil1_select);
-key_abil2_select_r = keyboard_check_released(kR_abil2_select);
-key_abil3_select_r = keyboard_check_released(kR_abil3_select);
+//key_abil1_select_r = keyboard_check_released(kR_abil1_select);
+//key_abil2_select_r = keyboard_check_released(kR_abil2_select);
+//key_abil3_select_r = keyboard_check_released(kR_abil3_select);
 
 
 
@@ -186,41 +186,46 @@ key_kama = 0;
 key_kama_held = 0;
 key_uppercut_held = 0;
 
-
-if(oIcon1.icon == 1) {
-	key_uppercut = key_abil1;	
-	key_uppercut_held = key_abil1_held;
-} else if(oIcon1.icon == 2) {
-	key_dash = key_abil1;
-} else if(oIcon1.icon == 3) {
-	key_lunge = key_abil1;
-} else if(oIcon1.icon == 4) {
-	key_kama = key_abil1;
-	key_kama_held = key_abil1_held;
+if(instance_exists(oIcon1)) {
+	if(oIcon1.icon == 1) {
+		key_uppercut = key_abil1;	
+		key_uppercut_held = key_abil1_held;
+	} else if(oIcon1.icon == 2) {
+		key_dash = key_abil1;
+	} else if(oIcon1.icon == 3) {
+		key_lunge = key_abil1;
+	} else if(oIcon1.icon == 4) {
+		key_kama = key_abil1;
+		key_kama_held = key_abil1_held;
+	}
 }
 
-if(oIcon2.icon == 1) {
-	key_uppercut = key_abil2;
-	key_uppercut_held = key_abil2_held;
-} else if(oIcon2.icon == 2) {
-	key_dash = key_abil2;
-} else if(oIcon2.icon == 3) {
-	key_lunge = key_abil2;
-} else if(oIcon2.icon == 4) {
-	key_kama = key_abil2;
-	key_kama_held = key_abil2_held;
+if(instance_exists(oIcon2)) {
+	if(oIcon2.icon == 1) {
+		key_uppercut = key_abil2;
+		key_uppercut_held = key_abil2_held;
+	} else if(oIcon2.icon == 2) {
+		key_dash = key_abil2;
+	} else if(oIcon2.icon == 3) {
+		key_lunge = key_abil2;
+	} else if(oIcon2.icon == 4) {
+		key_kama = key_abil2;
+		key_kama_held = key_abil2_held;
+	}
 }
 
-if(oIcon3.icon == 1) {
-	key_uppercut = key_abil3;	
-	key_uppercut_held = key_abil3_held;
-} else if(oIcon3.icon == 2) {
-	key_dash = key_abil3;
-} else if(oIcon3.icon == 3) {
-	key_lunge = key_abil3;
-} else if(oIcon3.icon == 4) {
-	key_kama = key_abil3;
-	key_kama_held = key_abil3_held;
+if(instance_exists(oIcon3)) {
+	if(oIcon3.icon == 1) {
+		key_uppercut = key_abil3;	
+		key_uppercut_held = key_abil3_held;
+	} else if(oIcon3.icon == 2) {
+		key_dash = key_abil3;
+	} else if(oIcon3.icon == 3) {
+		key_lunge = key_abil3;
+	} else if(oIcon3.icon == 4) {
+		key_kama = key_abil3;
+		key_kama_held = key_abil3_held;
+	}
 }
 
 
@@ -423,7 +428,7 @@ if (state == states.dead) {
 
 
 	//check if we can perform a dash
-	if ((key_dash || dash_buffer > 0) && !isBusyAbility && !dash_used) {
+	if ((key_dash || dash_buffer > 0) && !isBusyAbility && !dash_used && instance_exists(oIcon2) ) {
 		dashafterdelay = 0;
 		audio_play_sound(dash, 2, false);
 		audio_sound_pitch(dash, choose(0.9, 1, 1.1));
@@ -486,7 +491,7 @@ if (state == states.dead) {
 
 
 	//use lunge if the key is pressed and lunge hasn't been used.
-	if((key_lunge || lunge_buffer > 0) && !isBusyAbility && !lunge_used) {
+	if((key_lunge || lunge_buffer > 0) && !isBusyAbility && !lunge_used && instance_exists(oIcon3)) {
 		dashafterdelay = 0;
 		audio_play_sound(lunge, 3, false);
 		audio_sound_pitch(lunge, choose(0.8, 0.9));
@@ -513,7 +518,7 @@ if (state == states.dead) {
 	}
 
 	//use uppercut if the key is pressed and uppercut hasn't been used.
-	if ((key_uppercut || uppercut_buffer > 0) && !isBusyAbility && !uppercut_used) {
+	if ((key_uppercut || uppercut_buffer > 0) && !isBusyAbility && !uppercut_used && instance_exists(oIcon1)) {
 		audio_play_sound(uppercut,3,false);
 		isBusyAbility = true;
 		isBusy = true;

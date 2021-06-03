@@ -6,6 +6,7 @@ global.PauseManagerID = id;
 
 
 
+
 menuBase[0] = "Resume"
 menuBase[1] = "Chat";
 menuBase[2] = "Main Menu";
@@ -14,8 +15,9 @@ menuBase[4] = "Quit";
 
 menuOpt[0] = "Back"
 menuOpt[1] = "Controller Vibration";
-menuOpt[2] = "Music";
+menuOpt[2] = "<- Music ->";
 menuOpt[3] = "Easy Mode";
+menuOpt[4] = "<- Sound ->";
 
 menu = menuBase;
 

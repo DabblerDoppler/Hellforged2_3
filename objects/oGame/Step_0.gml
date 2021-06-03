@@ -14,7 +14,7 @@ if(deadFor >= deadDuration) {
 
 
 
-
+audio_master_gain(global.gameVolume);
 audio_sound_gain(global.music, global.musicVolume, 0);
 audio_sound_pitch(global.music, global.timeSlow);
 

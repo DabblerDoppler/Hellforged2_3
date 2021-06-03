@@ -1,12 +1,15 @@
-global.level[0] = rLevel0;
-global.level[1] = rLevel1;
-global.level[2] = rLevel2;
-global.level[3] = rLevel3;
-global.level[4] = rLevel4;
-global.level[5] = rLevel5;
-global.level[6] = rLevel6;
-global.level[7] = rLevel7;
-global.level[8] = rLevel8;
+global.level[0] = rTutorial0;
+global.level[1] = rTutorial1;
+global.level[2] = rTutorial2;
+global.level[3] = rTutorial3;
+global.level[3] = rLevel1;
+global.level[4] = rLevel2;
+global.level[5] = rLevel3;
+global.level[6] = rLevel4;
+global.level[7] = rLevel5;
+global.level[8] = rLevel6;
+global.level[9] = rLevel7;
+global.level[10] = rLevel8;
 
 global.timeSlow = 1.0;
 
@@ -32,13 +35,14 @@ if (file_exists(SAVEFILE)) {
 	global.musicVolume = file_text_read_real(file);
 	global.vibrationOn = file_text_read_real(file);
 	global.easyMode = file_text_read_real(file);
-	
+	global.gameVolume =  file_text_read_real(file);
 	file_text_close(file);
 	
 } else {
-global.musicVolume = 1.0;
-global.vibrationOn = true;
-global.easyMode = false;
+	global.gameVolume =  0.5;
+	global.musicVolume = 0.5;
+	global.vibrationOn = true;
+	global.easyMode = false;
 }
 
 
