@@ -18,6 +18,20 @@ if(gamepad_button_check(0, gp_select)) {
 	scr_SlideTransition(TRANS_MODE.RESTART);
 }
 //state machine
+
+if(instance_exists(oReflection)) {
+	if(mirror_waiting && oReflection.mirror_waiting) {
+		mirror_waiting = false;
+		x = oMirrorDoubleExit.x 
+		y = oMirrorDoubleExit.y + 10
+		image_alpha = 1;
+		
+	} else if (mirror_waiting) {
+		image_alpha = 0;
+		exit;
+	}
+}
+
 if(isDead) {
 	state = states.dead;
 	global.timeSlow = 1.0;
@@ -162,15 +176,15 @@ if(key_abil3_select_r && abil_sel != 0) {
 }
 
 
-if(abil1_used == 1) {
+if(global.abil1_used == 1) {
 	key_abil1 = 0;	
 }
 
-if(abil2_used == 1) {
+if(global.abil2_used == 1) {
 	key_abil2 = 0;	
 }
 
-if(abil2_used == 1) {
+if(global.abil2_used == 1) {
 	key_abil2 = 0;	
 }
 
@@ -548,29 +562,29 @@ if (state == states.dead) {
 			stylekilldelay = stylekilldelay_max;
 			if(stylekilltarget == oDeadBeholderKama) {
 				if(kamaBound == 1) {
-					abil1_used = 0;	
+					global.abil1_used = false;	
 					oIcon1Blood.exists = 1;
 					oIcon1Blood.image_index = 0;
 				} else if (kamaBound == 2) {
-					abil2_used = 0;	
+					global.abil2_used = false;	
 					oIcon2Blood.exists = 1;
 					oIcon2Blood.image_index = 0;
 				} else if (kamaBound == 3) {
-					abil3_used = 0;
+					global.abil3_used = false;
 					oIcon3Blood.exists = 1;
 					oIcon3Blood.image_index = 0;
 				}		
 			} else {
 				if(lungeBound == 1) {
-					abil1_used = 0;	
+					global.abil1_used = false;	
 					oIcon1Blood.exists = 1;
 					oIcon1Blood.image_index = 0;
 				} else if (lungeBound == 2) {
-					abil2_used = 0;	
+					global.abil2_used = false;	
 					oIcon2Blood.exists = 1;
 					oIcon2Blood.image_index = 0;
 				} else if (lungeBound == 3) {
-					abil3_used = 0;
+					global.abil3_used = false;
 					oIcon3Blood.exists = 1;
 					oIcon3Blood.image_index = 0;
 				}	
@@ -623,7 +637,7 @@ if (state == states.dead) {
 	}
 	
 
-	if(place_meeting(x + hsp, y, oMovingPlatform) || instance_exists(platformContact)) {
+	if(place_meeting(x + hsp, y, oMovingPlatform) || !(platformContact == -1)) {
 		//this key_jump is janky but key_jump is pressed not held so its ok
 		if(!key_jump) {
 			if(!instance_exists(platformContact)) {
@@ -683,7 +697,7 @@ if (state == states.dead) {
 		vsp_frac = 0;
 	}
 	
-	if (place_meeting(x, y + vsp, oMovingPlatform) && platformContact = 0) {
+	if (place_meeting(x, y + vsp, oMovingPlatform) && platformContact == -1) {
 		while(!place_meeting(x, y + sign(vsp), oMovingPlatform)) {
 			y = y + sign(vsp);	
 		}
@@ -726,14 +740,14 @@ if (state == states.dead) {
 	var last_onground = onground;
 	onground = place_meeting(x, y + 1, oWall);
 	
-	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform) && platformContact == 0) {
+	if(place_meeting(x, y + 1, oOneWayPlatform) || place_meeting(x, y + 1, oMovingPlatform) && platformContact == -1) {
 		onground = 1;	
 		if(place_meeting(x, y + 1, oMovingPlatform)) {
 			x += (global.timeSlow) * instance_place(x, y + 1, oMovingPlatform).hsp;
 		}
 	}
 	
-	platformContact = 0;
+	platformContact = -1;
 	
 	if(last_onground == 0 && onground == 1) {
 		audio_sound_pitch(land, choose(0.7, 0.8, 0.9, 1));
@@ -919,6 +933,8 @@ if (state == states.dead) {
 		ScreenShake(global.killShakeConstant,30);
 		audio_play_sound(playerdeath, 7, false);
 	}
+	
+
 	
 	
 } else if (state = states.bouncing) {

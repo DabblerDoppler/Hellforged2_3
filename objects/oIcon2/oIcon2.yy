@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sDashIcon",
+    "path": "sprites/sDashIcon/sDashIcon.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

@@ -12,15 +12,15 @@ ScreenShake(global.killShakeConstant, 15);
 
 
 if(oPlayer.uppercutBound == 1) {
-	oPlayer.abil1_used = 0;	
+	global.abil1_used = 0;	
 	oIcon1Blood.exists = 1;
 	oIcon1Blood.image_index = 0;
 } else if (oPlayer.uppercutBound == 2) {
-	oPlayer.abil2_used = 0;	
+	global.abil2_used = 0;	
 	oIcon2Blood.exists = 1;
 	oIcon2Blood.image_index = 0;
 } else if (oPlayer.uppercutBound == 3) {
-	oPlayer.abil3_used = 0;
+	global.abil3_used = 0;
 	oIcon3Blood.exists = 1;
 	oIcon3Blood.image_index = 0;
 }

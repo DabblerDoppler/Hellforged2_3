@@ -1,6 +1,6 @@
-abil1_used = false;
-abil2_used = false;
-abil3_used = false;
+global.abil1_used = false;
+global.abil2_used = false;
+global.abil3_used = false;
 if(instance_exists(oIcon1Blood)) {
 	oIcon1Blood.exists = 1;
 	oIcon1Blood.image_index = 2;

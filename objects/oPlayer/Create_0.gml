@@ -42,7 +42,10 @@ gib_number = 40;
 
 global.killShakeConstant = 7;
 
-platformContact = 0;
+reflection_active = false;
+mirror_waiting = false;
+
+platformContact = -1;
 hsp = 0;
 vsp = 0;
 hsp_frac = 0;
@@ -136,6 +139,10 @@ updown = 0;
 leftright = 0;
 
 kR_temp = ord("V");
+
+global.abil1_used = false;
+global.abil2_used = false;
+global.abil3_used = false;
 
 abil1_used = false;
 abil2_used = false;

@@ -10,6 +10,7 @@ global.level[7] = rLevel5;
 global.level[8] = rLevel6;
 global.level[9] = rLevel7;
 global.level[10] = rLevel8;
+global.level[11] = rLevel9;
 
 global.timeSlow = 1.0;
 

@@ -22,15 +22,15 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		
 		//remember that the hitbox needs this code too!
 		if(uppercutBound == 1) {
-			abil1_used = 0;	
+			global.abil1_used = 0;	
 			oIcon1Blood.exists = 1;
 			oIcon1Blood.image_index = 0;
 		} else if (uppercutBound == 2) {
-			abil2_used = 0;	
+			global.abil2_used = 0;	
 			oIcon2Blood.exists = 1;
 			oIcon2Blood.image_index = 0;
 		} else if (uppercutBound == 3) {
-			abil3_used = 0;
+			global.abil3_used = 0;
 			oIcon3Blood.exists = 1;
 			oIcon3Blood.image_index = 0;
 		}
@@ -43,15 +43,15 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		audio_play_sound(pitchArray[killPitch], 2, false);
 		killPitch++;
 		if(dashBound == 1) {
-			abil1_used = 0;	
+			global.abil1_used = 0;	
 			oIcon1Blood.exists = 1;
 			oIcon1Blood.image_index = 0;
 		} else if (dashBound == 2) {
-			abil2_used = 0;	
+			global.abil2_used = 0;	
 			oIcon2Blood.exists = 1;
 			oIcon2Blood.image_index = 0;
 		} else if (dashBound == 3) {
-			abil3_used = 0;
+			global.abil3_used = 0;
 			oIcon3Blood.exists = 1;
 			oIcon3Blood.image_index = 0;
 		}

@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sLungeIcon",
+    "path": "sprites/sLungeIcon/sLungeIcon.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sUppercutIcon",
+    "path": "sprites/sUppercutIcon/sUppercutIcon.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
