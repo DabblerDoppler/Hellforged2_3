@@ -133,7 +133,7 @@ key_abil1_select = 0;
 key_abil2_select = 0;
 key_abil3_select = 0;
 
-killPitch = 0;
+global.killPitch = 0;
 
 updown = 0;
 leftright = 0;

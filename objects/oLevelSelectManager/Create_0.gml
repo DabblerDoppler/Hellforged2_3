@@ -1,7 +1,7 @@
 
 var i;
 for (i = 0; i < array_length_1d(global.level); i++) {
-	menu[i] = "Level " + string(i+1);
+	menu[i] = string(i+1);
 }
 
 

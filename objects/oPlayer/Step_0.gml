@@ -22,8 +22,8 @@ if(gamepad_button_check(0, gp_select)) {
 if(instance_exists(oReflection)) {
 	if(mirror_waiting && oReflection.mirror_waiting) {
 		mirror_waiting = false;
-		x = oMirrorDoubleExit.x 
-		y = oMirrorDoubleExit.y + 10
+		x = oMirrorDoubleExit.x + 20
+		y = oMirrorDoubleExit.y + 40
 		image_alpha = 1;
 		
 	} else if (mirror_waiting) {
@@ -615,8 +615,8 @@ if (state == states.dead) {
 		var t = choose(0,1,2);
 		audio_play_sound(killSound[t], 5, false);
 		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
-		audio_play_sound(pitchArray[killPitch], 2, false);
-		killPitch++;
+		audio_play_sound(pitchArray[global.killPitch], 2, false);
+		global.killPitch++;
 		
 	}
 
@@ -774,7 +774,7 @@ if (state == states.dead) {
 	if (onground) { 
 		coyoteTime = coyoteTime_Max;
 		onwall = 0;
-		killPitch = 0;
+		global.killPitch = 0;
 	}
 
 	if(onground || (onwall != 0) &! uppercutdelay > 0) { lungedelay = false; }

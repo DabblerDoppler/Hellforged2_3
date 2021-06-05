@@ -14,8 +14,8 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		var t = choose(0,1,2);
 		audio_play_sound(killSound[t], 5, false);
 		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
-		audio_play_sound(pitchArray[killPitch], 2, false);
-		killPitch++;
+		audio_play_sound(pitchArray[global.killPitch], 2, false);
+		global.killPitch++;
 		instance_destroy(other);
 		ScreenShake(global.killShakeConstant, 15);
 		var n;
@@ -40,8 +40,8 @@ if(lungedelay || uppercutdelay != 0 || dashdelay != 0) {
 		var t = choose(0,1,2);
 		audio_play_sound(killSound[t], 5, false);
 		audio_sound_pitch(killSound[t], choose(0.9, 1.0, 1.1));
-		audio_play_sound(pitchArray[killPitch], 2, false);
-		killPitch++;
+		audio_play_sound(pitchArray[global.killPitch], 2, false);
+		global.killPitch++;
 		if(dashBound == 1) {
 			global.abil1_used = 0;	
 			oIcon1Blood.exists = 1;

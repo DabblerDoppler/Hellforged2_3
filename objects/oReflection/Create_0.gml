@@ -1,8 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-x = oMirrorSilverExit.x
-y = oMirrorSilverExit.y + 10
+x = oMirrorSilverExit.x + 20
+y = oMirrorSilverExit.y + 40
 
 
 

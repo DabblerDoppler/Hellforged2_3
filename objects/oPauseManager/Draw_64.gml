@@ -11,6 +11,9 @@ if(room != rMainMenu && room != rCreditMenu && room != rLevelSelect) {
 		draw_set_valign(fa_middle);
 		draw_set_font(fManaSpace);
 		draw_set_color(c_white);
+		
+		
+		
 		var m;
 		for (m = 0; m < array_length_1d(menu); m += 1) {
 				if((string(menu[m]) == "Chat") && (oPlayer.onground == 0)) {

@@ -2,15 +2,15 @@ global.level[0] = rTutorial0;
 global.level[1] = rTutorial1;
 global.level[2] = rTutorial2;
 global.level[3] = rTutorial3;
-global.level[3] = rLevel1;
-global.level[4] = rLevel2;
-global.level[5] = rLevel3;
-global.level[6] = rLevel4;
-global.level[7] = rLevel5;
-global.level[8] = rLevel6;
-global.level[9] = rLevel7;
-global.level[10] = rLevel8;
-global.level[11] = rLevel9;
+global.level[4] = rLevel1;
+global.level[5] = rLevel2;
+global.level[6] = rLevel3;
+global.level[7] = rLevel4;
+global.level[8] = rLevel5;
+global.level[9] = rLevel6;
+global.level[10] = rLevel7;
+global.level[11] = rLevel8;
+global.level[12] = rLevel9;
 
 global.timeSlow = 1.0;
 
